@@ -1,0 +1,15 @@
+version: "3.5"
+services:
+  server:
+    image: golang:1.15.6-buster
+    working_dir: "/server"
+    command: bash -c "go run main.go"
+    volumes:
+      - "./server:/server"
+    deploy:
+      replicas: 5
+  client:
+    image: alpine:latest
+    stdin_open: true
+    tty: true
+    command: sh -c "apk add curl && sh"
